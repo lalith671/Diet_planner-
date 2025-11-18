@@ -269,14 +269,33 @@ const Index = () => {
     maxBudget: number,
     dietPref: string
   ): FoodItem => {
-    let filtered = foods.filter((food) => {
-      if (dietPref === "veg") return food.type === "veg";
-      if (dietPref === "nonveg") return food.type === "nonveg";
-      return true;
-    });
+    let filtered = foods;
 
-    if (filtered.length === 0) filtered = foods.filter((f) => f.type === "veg");
+    // Filter by diet preference
+    if (dietPref === "veg") {
+      filtered = foods.filter((food) => food.type === "veg");
+    } else if (dietPref === "nonveg") {
+      filtered = foods.filter((food) => food.type === "nonveg");
+    } else if (dietPref === "both") {
+      // For "both", randomly choose between veg or nonveg to add variety
+      const vegItems = foods.filter((food) => food.type === "veg");
+      const nonVegItems = foods.filter((food) => food.type === "nonveg");
+      
+      // 50-50 chance to pick from veg or nonveg for variety
+      filtered = Math.random() > 0.5 ? nonVegItems : vegItems;
+      
+      // If one category is empty, use the other
+      if (filtered.length === 0) {
+        filtered = vegItems.length > 0 ? vegItems : nonVegItems;
+      }
+    }
 
+    // Fallback to all veg if filter is empty
+    if (filtered.length === 0) {
+      filtered = foods.filter((f) => f.type === "veg");
+    }
+
+    // Sort by calorie match and budget fit
     filtered.sort((a, b) => {
       const aDiff = Math.abs(a.calories - targetCalories);
       const bDiff = Math.abs(b.calories - targetCalories);
