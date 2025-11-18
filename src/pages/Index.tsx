@@ -146,7 +146,7 @@ const FOOD_DATABASE = {
     { name: "Grilled Chicken with Roti", quantity: "200g + 2 rotis", calories: 480, protein: 36, carbs: 40, fats: 14, fiber: 2, price: 140, type: "nonveg" as const },
     { name: "Egg Fried Rice", quantity: "1 plate (250g)", calories: 420, protein: 16, carbs: 48, fats: 16, fiber: 2, price: 80, type: "nonveg" as const },
     { name: "Butter Chicken with Naan", quantity: "1 naan + 150g", calories: 580, protein: 32, carbs: 52, fats: 24, fiber: 2, price: 160, type: "nonveg" as const },
-    { name: "Fish Curry with Rice", quantum: "1 plate (280g)", calories: 500, protein: 36, carbs: 48, fats: 14, fiber: 1, price: 170, type: "nonveg" as const },
+    { name: "Fish Curry with Rice", quantity: "1 plate (280g)", calories: 500, protein: 36, carbs: 48, fats: 14, fiber: 1, price: 170, type: "nonveg" as const },
     { name: "Mutton Keema with Roti", quantity: "2 rotis + 150g", calories: 560, protein: 36, carbs: 42, fats: 22, fiber: 2, price: 190, type: "nonveg" as const },
     { name: "Chicken Tikka with Roti", quantity: "2 rotis + 150g", calories: 520, protein: 34, carbs: 40, fats: 20, fiber: 2, price: 150, type: "nonveg" as const },
     { name: "Tandoori Fish", quantity: "200g + veggies", calories: 420, protein: 38, carbs: 22, fats: 14, fiber: 2, price: 200, type: "nonveg" as const },
