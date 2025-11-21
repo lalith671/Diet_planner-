@@ -328,8 +328,13 @@ const FOOD_DATABASE = {
     const bmi = calculateBMI(formData.weight, formData.height);
     const bmr = calculateBMR(formData.weight, formData.height, formData.age, formData.sex);
     const activityFactor = ACTIVITY_FACTORS[formData.activityLevel as keyof typeof ACTIVITY_FACTORS];
-    const goalAdjustment = GOAL_ADJUSTMENTS[formData.goal as keyof typeof GOAL_ADJUSTMENTS];
-    const targetCalories = bmr * activityFactor + goalAdjustment;
+    const tdee = bmr * activityFactor;
+    let targetCalories = tdee;
+    if (formData.goal === "lose") {
+      targetCalories = tdee * 0.85; // 15% deficit
+    } else if (formData.goal === "gain") {
+      targetCalories = tdee * 1.15; // 15% surplus
+    }
 
     const calorieDistribution = {
       breakfast: targetCalories * 0.25,
