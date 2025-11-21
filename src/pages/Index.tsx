@@ -500,188 +500,227 @@ const FOOD_DATABASE = {
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#f2fff6", padding: "32px 0" }}>
-      <div style={{ maxWidth: 700, margin: "0 auto", background: "#fff", border: "1px solid #b2dfdb", padding: 24 }}>
+    <div className="min-h-screen bg-background flex flex-col items-center justify-start py-8 px-2 md:px-0">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="w-full max-w-2xl bg-white rounded-3xl shadow-2xl p-6 md:p-10 mt-4"
+      >
         {showResults && results ? (
           <>
-            <h2 style={{ fontSize: 22, fontWeight: 700, color: "#00897b", marginBottom: 12 }}>Your Results</h2>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginBottom: 16 }}>
-              <div style={{ border: "1px solid #b2dfdb", borderRadius: 4, padding: 12, minWidth: 100 }}>
-                <div style={{ fontSize: 12, color: "#666" }}>BMI</div>
-                <div style={{ fontWeight: 600 }}>{results.bmi}</div>
-              </div>
-              <div style={{ border: "1px solid #b2dfdb", borderRadius: 4, padding: 12, minWidth: 100 }}>
-                <div style={{ fontSize: 12, color: "#666" }}>BMR</div>
-                <div style={{ fontWeight: 600 }}>{results.bmr} kcal</div>
-              </div>
-              <div style={{ border: "1px solid #b2dfdb", borderRadius: 4, padding: 12, minWidth: 100 }}>
-                <div style={{ fontSize: 12, color: "#666" }}>Target Calories</div>
-                <div style={{ fontWeight: 600 }}>{results.targetCalories} kcal</div>
-              </div>
-              <div style={{ border: "1px solid #b2dfdb", borderRadius: 4, padding: 12, minWidth: 100 }}>
-                <div style={{ fontSize: 12, color: "#666" }}>Protein</div>
-                <div style={{ fontWeight: 600 }}>{results.totalProtein} g</div>
-              </div>
-              <div style={{ border: "1px solid #b2dfdb", borderRadius: 4, padding: 12, minWidth: 100 }}>
-                <div style={{ fontSize: 12, color: "#666" }}>Carbs</div>
-                <div style={{ fontWeight: 600 }}>{results.totalCarbs} g</div>
-              </div>
-              <div style={{ border: "1px solid #b2dfdb", borderRadius: 4, padding: 12, minWidth: 100 }}>
-                <div style={{ fontSize: 12, color: "#666" }}>Fats</div>
-                <div style={{ fontWeight: 600 }}>{results.totalFats} g</div>
-              </div>
-              <div style={{ border: "1px solid #b2dfdb", borderRadius: 4, padding: 12, minWidth: 100 }}>
-                <div style={{ fontSize: 12, color: "#666" }}>Fiber</div>
-                <div style={{ fontWeight: 600 }}>{results.totalFiber} g</div>
-              </div>
-              <div style={{ border: "1px solid #b2dfdb", borderRadius: 4, padding: 12, minWidth: 100 }}>
-                <div style={{ fontSize: 12, color: "#666" }}>Total Cost</div>
-                <div style={{ fontWeight: 600 }}>₹{results.totalCost}</div>
-              </div>
-            </div>
-            <h3 style={{ fontSize: 18, fontWeight: 700, color: "#00897b", marginBottom: 10 }}>Your Meal Plan</h3>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginBottom: 16 }}>
-              {Object.entries(results.mealPlan).map(([meal, food]) => (
-                <div key={meal} style={{ border: "1px solid #b2dfdb", borderRadius: 4, padding: 12, minWidth: 180, marginBottom: 8 }}>
-                  <div style={{ fontWeight: 600, textTransform: "capitalize", color: "#00897b" }}>{meal}</div>
-                  <div style={{ fontWeight: 500 }}>{food.name}</div>
-                  <div style={{ fontSize: 12, color: "#666" }}>{food.quantity}</div>
-                  <div style={{ fontSize: 12, color: "#444" }}>
-                    Calories: {food.calories} | Protein: {food.protein}g | Carbs: {food.carbs}g | Fats: {food.fats}g | Fiber: {food.fiber}g | Price: ₹{food.price}
-                  </div>
+            <div className="mb-6">
+              <h2 className="text-2xl font-bold mb-2 text-emerald-700 flex items-center gap-2">
+                <Calculator className="w-6 h-6" /> Your Results
+              </h2>
+              <div className="flex flex-wrap gap-4 mb-4">
+                <div className="bg-emerald-50 rounded-xl p-4 flex-1 min-w-[120px]">
+                  <div className="text-xs text-gray-500">BMI</div>
+                  <div className="text-lg font-semibold">{results.bmi}</div>
                 </div>
-              ))}
+                <div className="bg-emerald-50 rounded-xl p-4 flex-1 min-w-[120px]">
+                  <div className="text-xs text-gray-500">BMR</div>
+                  <div className="text-lg font-semibold">{results.bmr} kcal</div>
+                </div>
+                <div className="bg-emerald-50 rounded-xl p-4 flex-1 min-w-[120px]">
+                  <div className="text-xs text-gray-500">Target Calories</div>
+                  <div className="text-lg font-semibold">{results.targetCalories} kcal</div>
+                </div>
+              </div>
+              <div className="flex flex-wrap gap-4 mb-4">
+                <div className="bg-emerald-50 rounded-xl p-4 flex-1 min-w-[120px]">
+                  <div className="text-xs text-gray-500">Total Protein</div>
+                  <div className="text-lg font-semibold">{results.totalProtein} g</div>
+                </div>
+                <div className="bg-emerald-50 rounded-xl p-4 flex-1 min-w-[120px]">
+                  <div className="text-xs text-gray-500">Total Carbs</div>
+                  <div className="text-lg font-semibold">{results.totalCarbs} g</div>
+                </div>
+                <div className="bg-emerald-50 rounded-xl p-4 flex-1 min-w-[120px]">
+                  <div className="text-xs text-gray-500">Total Fats</div>
+                  <div className="text-lg font-semibold">{results.totalFats} g</div>
+                </div>
+                <div className="bg-emerald-50 rounded-xl p-4 flex-1 min-w-[120px]">
+                  <div className="text-xs text-gray-500">Total Fiber</div>
+                  <div className="text-lg font-semibold">{results.totalFiber} g</div>
+                </div>
+                <div className="bg-emerald-50 rounded-xl p-4 flex-1 min-w-[120px]">
+                  <div className="text-xs text-gray-500">Total Cost</div>
+                  <div className="text-lg font-semibold">₹{results.totalCost}</div>
+                </div>
+              </div>
             </div>
-            <button style={{ background: "#00897b", color: "#fff", fontWeight: 600, padding: "8px 24px", border: "none", borderRadius: 4, cursor: "pointer" }} onClick={handleReset}>
-              Start Over
-            </button>
+            <div className="mb-6">
+              <h3 className="text-xl font-bold mb-2 text-emerald-700 flex items-center gap-2">
+                <Utensils className="w-5 h-5" /> Your Meal Plan
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {Object.entries(results.mealPlan).map(([meal, food]) => (
+                  <div key={meal} className="bg-emerald-100 rounded-xl p-4">
+                    <div className="font-semibold capitalize text-emerald-800 mb-1">{meal}</div>
+                    <div className="text-sm font-bold">{food.name}</div>
+                    <div className="text-xs text-gray-600 mb-1">{food.quantity}</div>
+                    <div className="flex flex-wrap gap-2 text-xs">
+                      <span>Calories: {food.calories}</span>
+                      <span>Protein: {food.protein}g</span>
+                      <span>Carbs: {food.carbs}g</span>
+                      <span>Fats: {food.fats}g</span>
+                      <span>Fiber: {food.fiber}g</span>
+                      <span>Price: ₹{food.price}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="flex gap-4 mt-6">
+              <button
+                className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-6 rounded-xl shadow"
+                onClick={handleReset}
+              >
+                Start Over
+              </button>
+            </div>
           </>
         ) : (
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleSubmit();
-            }}
-            style={{ display: "flex", flexDirection: "column", gap: 16 }}
+          <motion.div
+            initial={{ scale: 0.95, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="bg-white/80 backdrop-blur-lg rounded-3xl p-8 shadow-2xl border-2 border-emerald-200"
           >
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 16 }}>
-              <div style={{ flex: 1, minWidth: 180 }}>
-                <label style={{ fontWeight: 500 }}>Age</label>
-                <input
-                  type="number"
-                  min={10}
-                  max={100}
-                  value={formData.age || ""}
-                  onChange={(e) => updateFormData("age", Number(e.target.value))}
-                  style={{ width: "100%", padding: 8, border: "1px solid #b2dfdb", borderRadius: 4, marginTop: 4 }}
-                  required
-                />
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSubmit();
+              }}
+              className="space-y-6"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium mb-1">Age</label>
+                  <input
+                    type="number"
+                    min={10}
+                    max={100}
+                    value={formData.age || ""}
+                    onChange={(e) => updateFormData("age", Number(e.target.value))}
+                    className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Sex</label>
+                  <select
+                    value={formData.sex}
+                    onChange={(e) => updateFormData("sex", e.target.value as "male" | "female")}
+                    className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                    required
+                  >
+                    <option value="">Select</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Weight (kg)</label>
+                  <input
+                    type="number"
+                    min={30}
+                    max={200}
+                    value={formData.weight || ""}
+                    onChange={(e) => updateFormData("weight", Number(e.target.value))}
+                    className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Height (cm)</label>
+                  <input
+                    type="number"
+                    min={100}
+                    max={250}
+                    value={formData.height || ""}
+                    onChange={(e) => updateFormData("height", Number(e.target.value))}
+                    className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Activity Level</label>
+                  <select
+                    value={formData.activityLevel}
+                    onChange={(e) => updateFormData("activityLevel", e.target.value as any)}
+                    className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                    required
+                  >
+                    <option value="">Select</option>
+                    <option value="sedentary">Sedentary</option>
+                    <option value="light">Light</option>
+                    <option value="moderate">Moderate</option>
+                    <option value="active">Active</option>
+                    <option value="veryActive">Very Active</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Goal</label>
+                  <select
+                    value={formData.goal}
+                    onChange={(e) => updateFormData("goal", e.target.value as any)}
+                    className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                    required
+                  >
+                    <option value="">Select</option>
+                    <option value="lose">Lose Weight</option>
+                    <option value="maintain">Maintain Weight</option>
+                    <option value="gain">Gain Weight</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Diet Preference</label>
+                  <select
+                    value={formData.dietPreference}
+                    onChange={(e) => updateFormData("dietPreference", e.target.value as any)}
+                    className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                    required
+                  >
+                    <option value="">Select</option>
+                    <option value="veg">Vegetarian</option>
+                    <option value="nonveg">Non-Vegetarian</option>
+                    <option value="both">Both</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Daily Budget (₹)</label>
+                  <input
+                    type="number"
+                    min={30}
+                    max={1000}
+                    value={formData.budget || ""}
+                    onChange={(e) => updateFormData("budget", Number(e.target.value))}
+                    className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                    required
+                  />
+                </div>
               </div>
-              <div style={{ flex: 1, minWidth: 180 }}>
-                <label style={{ fontWeight: 500 }}>Sex</label>
-                <select
-                  value={formData.sex}
-                  onChange={(e) => updateFormData("sex", e.target.value as "male" | "female")}
-                  style={{ width: "100%", padding: 8, border: "1px solid #b2dfdb", borderRadius: 4, marginTop: 4 }}
-                  required
+              <div className="flex gap-4 mt-6">
+                <button
+                  type="submit"
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-6 rounded-xl shadow"
                 >
-                  <option value="">Select</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </select>
-              </div>
-              <div style={{ flex: 1, minWidth: 180 }}>
-                <label style={{ fontWeight: 500 }}>Weight (kg)</label>
-                <input
-                  type="number"
-                  min={30}
-                  max={200}
-                  value={formData.weight || ""}
-                  onChange={(e) => updateFormData("weight", Number(e.target.value))}
-                  style={{ width: "100%", padding: 8, border: "1px solid #b2dfdb", borderRadius: 4, marginTop: 4 }}
-                  required
-                />
-              </div>
-              <div style={{ flex: 1, minWidth: 180 }}>
-                <label style={{ fontWeight: 500 }}>Height (cm)</label>
-                <input
-                  type="number"
-                  min={100}
-                  max={250}
-                  value={formData.height || ""}
-                  onChange={(e) => updateFormData("height", Number(e.target.value))}
-                  style={{ width: "100%", padding: 8, border: "1px solid #b2dfdb", borderRadius: 4, marginTop: 4 }}
-                  required
-                />
-              </div>
-              <div style={{ flex: 1, minWidth: 180 }}>
-                <label style={{ fontWeight: 500 }}>Activity Level</label>
-                <select
-                  value={formData.activityLevel}
-                  onChange={(e) => updateFormData("activityLevel", e.target.value as any)}
-                  style={{ width: "100%", padding: 8, border: "1px solid #b2dfdb", borderRadius: 4, marginTop: 4 }}
-                  required
+                  Generate Plan
+                </button>
+                <button
+                  type="button"
+                  className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-6 rounded-xl shadow"
+                  onClick={handleReset}
                 >
-                  <option value="">Select</option>
-                  <option value="sedentary">Sedentary</option>
-                  <option value="light">Light</option>
-                  <option value="moderate">Moderate</option>
-                  <option value="active">Active</option>
-                  <option value="veryActive">Very Active</option>
-                </select>
+                  Reset
+                </button>
               </div>
-              <div style={{ flex: 1, minWidth: 180 }}>
-                <label style={{ fontWeight: 500 }}>Goal</label>
-                <select
-                  value={formData.goal}
-                  onChange={(e) => updateFormData("goal", e.target.value as any)}
-                  style={{ width: "100%", padding: 8, border: "1px solid #b2dfdb", borderRadius: 4, marginTop: 4 }}
-                  required
-                >
-                  <option value="">Select</option>
-                  <option value="lose">Lose Weight</option>
-                  <option value="maintain">Maintain Weight</option>
-                  <option value="gain">Gain Weight</option>
-                </select>
-              </div>
-              <div style={{ flex: 1, minWidth: 180 }}>
-                <label style={{ fontWeight: 500 }}>Diet Preference</label>
-                <select
-                  value={formData.dietPreference}
-                  onChange={(e) => updateFormData("dietPreference", e.target.value as any)}
-                  style={{ width: "100%", padding: 8, border: "1px solid #b2dfdb", borderRadius: 4, marginTop: 4 }}
-                  required
-                >
-                  <option value="">Select</option>
-                  <option value="veg">Vegetarian</option>
-                  <option value="nonveg">Non-Vegetarian</option>
-                  <option value="both">Both</option>
-                </select>
-              </div>
-              <div style={{ flex: 1, minWidth: 180 }}>
-                <label style={{ fontWeight: 500 }}>Daily Budget (₹)</label>
-                <input
-                  type="number"
-                  min={30}
-                  max={1000}
-                  value={formData.budget || ""}
-                  onChange={(e) => updateFormData("budget", Number(e.target.value))}
-                  style={{ width: "100%", padding: 8, border: "1px solid #b2dfdb", borderRadius: 4, marginTop: 4 }}
-                  required
-                />
-              </div>
-            </div>
-            <div style={{ marginTop: 20 }}>
-              <button type="submit" style={{ background: "#00897b", color: "#fff", fontWeight: 600, padding: "8px 24px", border: "none", borderRadius: 4, cursor: "pointer", marginRight: 12 }}>
-                Generate Plan
-              </button>
-              <button type="button" style={{ background: "#eee", color: "#333", fontWeight: 600, padding: "8px 24px", border: "1px solid #b2dfdb", borderRadius: 4, cursor: "pointer" }} onClick={handleReset}>
-                Reset
-              </button>
-            </div>
-          </form>
+            </form>
+          </motion.div>
         )}
-      </div>
+      </motion.div>
     </div>
   );
 };
