@@ -126,7 +126,6 @@ const Index = () => {
 
   const [results, setResults] = useState<Results | null>(null);
   const [showResults, setShowResults] = useState(false);
-
   const updateFormData = (field: keyof FormData, value: any) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
@@ -157,13 +156,11 @@ const Index = () => {
     });
 
     if (filtered.length === 0) filtered = foods.filter((f) => f.type === "veg");
-
     filtered.sort((a, b) => {
       const aDiff = Math.abs(a.calories - targetCalories);
       const bDiff = Math.abs(b.calories - targetCalories);
       const aBudgetFit = a.price <= maxBudget ? 0 : a.price - maxBudget;
       const bBudgetFit = b.price <= maxBudget ? 0 : b.price - maxBudget;
-      
       if (aBudgetFit !== bBudgetFit) return aBudgetFit - bBudgetFit;
       return aDiff - bDiff;
     });
@@ -177,7 +174,6 @@ const Index = () => {
     const activityFactor = ACTIVITY_FACTORS[formData.activityLevel as keyof typeof ACTIVITY_FACTORS];
     const goalAdjustment = GOAL_ADJUSTMENTS[formData.goal as keyof typeof GOAL_ADJUSTMENTS];
     const targetCalories = bmr * activityFactor + goalAdjustment;
-
     const calorieDistribution = {
       breakfast: targetCalories * 0.25,
       lunch: targetCalories * 0.35,
@@ -312,10 +308,30 @@ const Index = () => {
             className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12"
           >
             {[
-              { label: "BMI", value: results.bmi, icon: Calculator, unit: "" },
-              { label: "BMR", value: results.bmr, icon: Activity, unit: "cal" },
-              { label: "Target Calories", value: results.targetCalories, icon: Utensils, unit: "cal" },
-              { label: "Your Budget", value: `₹${formData.budget}`, icon: DollarSign, unit: "" },
+              {
+                label: "BMI",
+                value: results.bmi,
+                icon: Calculator,
+                unit: "",
+              },
+              {
+                label: "BMR",
+                value: results.bmr,
+                icon: Activity,
+                unit: "cal",
+              },
+              {
+                label: "Target Calories",
+                value: results.targetCalories,
+                icon: Utensils,
+                unit: "cal",
+              },
+              {
+                label: "Your Budget",
+                value: `₹${formData.budget}`,
+                icon: DollarSign,
+                unit: "",
+              },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}
@@ -354,7 +370,7 @@ const Index = () => {
                         : "bg-amber-100 text-amber-700"
                     }`}
                   >
-                    {food.type === "veg" ? "🌱 Veg" : "🍗 Non-Veg"}
+                    {food.type === "veg" ? "🥗 Veg" : "🍗 Non-Veg"}
                   </span>
                 </div>
                 <h4 className="text-xl font-semibold text-foreground mb-3">{food.name}</h4>
@@ -383,9 +399,7 @@ const Index = () => {
               <div className="text-center">
                 <p className="text-muted-foreground mb-2">Total Calories</p>
                 <p className="text-4xl font-bold text-foreground">{results.totalCalories}</p>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Target: {results.targetCalories} cal
-                </p>
+                <p className="text-sm text-muted-foreground mt-1">Target: {results.targetCalories} cal</p>
               </div>
               <div className="text-center">
                 <p className="text-muted-foreground mb-2">Total Cost</p>
@@ -399,7 +413,7 @@ const Index = () => {
                     results.totalCost <= formData.budget ? "text-emerald-600" : "text-amber-600"
                   }`}
                 >
-                  {results.totalCost <= formData.budget ? "✓" : "⚠"}
+                  {results.totalCost <= formData.budget ? "✅" : "⚠️"}
                 </p>
                 <p className="text-sm text-muted-foreground mt-1">
                   {results.totalCost <= formData.budget
