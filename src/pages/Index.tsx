@@ -788,8 +788,8 @@ const FOOD_DATABASE = {
                 Create New Plan
               </motion.button>
             </motion.div>
-          </>
-        ) : (
+              </>
+            )
           <motion.div
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
