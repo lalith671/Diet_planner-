@@ -1,6 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Calculator, Utensils, Activity, DollarSign } from "lucide-react";
+import { Calculator, Utensils, Activity, DollarSign, Box, Sparkles } from "lucide-react";
+
+// 3D Components
+import { Scene3D, SceneType } from "../core/3DScene";
+import { FOOD_DATABASE_3D } from "../data/foodDatabase3D";
+import { NutritionEngine3D } from "../utils/nutritionEngine3D";
+import { DeviceCapabilitiesDetector } from "../utils/deviceCapabilities";
 
 interface FormData {
   age: number;
