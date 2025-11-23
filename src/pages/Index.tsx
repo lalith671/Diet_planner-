@@ -545,15 +545,75 @@ const FOOD_DATABASE = {
       >
         {showResults && results ? (
           <>
-            <motion.header
-              initial={{ y: -50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-12"
-            >
-              <h1 className="text-5xl font-bold text-foreground mb-3">Your Personalized Diet Plan</h1>
-              <p className="text-muted-foreground text-lg">Tailored to your goals and budget</p>
-            </motion.header>
+            {/* 3D Scene when in 3D mode */}
+            {is3DMode && nutrition3DData ? (
+              <div className="w-full h-screen mb-8">
+                <Scene3D
+                  currentScene={current3DScene}
+                  onSceneChange={setCurrent3DScene}
+                  nutritionData={nutrition3DData}
+                  userData={formData}
+                  className="w-full h-full"
+                />
+
+                {/* 3D Scene Navigation */}
+                <div className="fixed top-4 left-4 z-50 bg-white/90 backdrop-blur-lg rounded-lg p-3 shadow-lg">
+                  <h3 className="font-semibold mb-2">Navigate 3D World</h3>
+                  <div className="grid grid-cols-2 gap-2">
+                    <button
+                      onClick={() => setCurrent3DScene('ai-lab')}
+                      className={`px-3 py-2 rounded text-sm ${
+                        current3DScene === 'ai-lab' ? 'bg-blue-500 text-white' : 'bg-gray-200'
+                      }`}
+                    >
+                      AI Lab
+                    </button>
+                    <button
+                      onClick={() => setCurrent3DScene('nutrient-universe')}
+                      className={`px-3 py-2 rounded text-sm ${
+                        current3DScene === 'nutrient-universe' ? 'bg-purple-500 text-white' : 'bg-gray-200'
+                      }`}
+                    >
+                      Universe
+                    </button>
+                    <button
+                      onClick={() => setCurrent3DScene('holographic-analyzer')}
+                      className={`px-3 py-2 rounded text-sm ${
+                        current3DScene === 'holographic-analyzer' ? 'bg-cyan-500 text-white' : 'bg-gray-200'
+                      }`}
+                    >
+                      Analyzer
+                    </button>
+                    <button
+                      onClick={() => setCurrent3DScene('body-lab')}
+                      className={`px-3 py-2 rounded text-sm ${
+                        current3DScene === 'body-lab' ? 'bg-orange-500 text-white' : 'bg-gray-200'
+                      }`}
+                    >
+                      Body Lab
+                    </button>
+                    <button
+                      onClick={() => setCurrent3DScene('budget-universe')}
+                      className={`px-3 py-2 rounded text-sm ${
+                        current3DScene === 'budget-universe' ? 'bg-yellow-500 text-white' : 'bg-gray-200'
+                      }`}
+                    >
+                      Budget
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <>
+                <motion.header
+                  initial={{ y: -50, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.6 }}
+                  className="text-center mb-12"
+                >
+                  <h1 className="text-5xl font-bold text-foreground mb-3">Your Personalized Diet Plan</h1>
+                  <p className="text-muted-foreground text-lg">Tailored to your goals and budget</p>
+                </motion.header>
             <motion.div
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
