@@ -47,6 +47,39 @@ const Index = () => {
   const [deviceCapabilities, setDeviceCapabilities] = useState<any>(null);
   const [nutrition3DData, setNutrition3DData] = useState<any>(null);
 
+  // Check device capabilities on mount
+  useEffect(() => {
+    const checkDeviceCapabilities = async () => {
+      const detector = DeviceCapabilitiesDetector.getInstance();
+      const capabilities = await detector.detectCapabilities();
+      setDeviceCapabilities(capabilities);
+
+      // Auto-disable 3D mode if WebGL is not supported
+      if (!capabilities.webgl2) {
+        setIs3DMode(false);
+      }
+    };
+
+    checkDeviceCapabilities();
+  }, []);
+
+  // Prepare 3D nutrition data when results are available
+  useEffect(() => {
+    if (results && showResults) {
+      const spatialData = NutritionEngine3D.createSpatialNutritionData(formData, results.mealPlan);
+      setNutrition3DData({
+        ...results,
+        ...spatialData,
+        foodDatabase: FOOD_DATABASE_3D,
+        budgetData: {
+          total: formData.budget,
+          spent: results.totalCost,
+          remaining: formData.budget - results.totalCost
+        }
+      });
+    }
+  }, [results, showResults, formData]);
+
 
   // Helper: Calculate BMI
   function calculateBMI(weight: number, height: number): number {
