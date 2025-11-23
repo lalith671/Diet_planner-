@@ -504,8 +504,38 @@ const FOOD_DATABASE = {
   return (
     <div className="min-h-screen bg-gradient-main px-4 py-8">
       <div className="text-center mb-10">
-        <h1 className="text-6xl font-bold text-foreground mb-4">Indian Diet Planner</h1>
-        <p className="text-2xl text-muted-foreground">Get your personalized meal plan based on your goals and budget</p>
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex-1">
+            <h1 className="text-6xl font-bold text-foreground mb-2">Indian Diet Planner</h1>
+            <p className="text-2xl text-muted-foreground">Get your personalized meal plan based on your goals and budget</p>
+          </div>
+
+          {/* 3D Mode Toggle */}
+          {deviceCapabilities?.webgl2 && (
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setIs3DMode(!is3DMode)}
+                className={`flex items-center gap-2 px-4 py-2 rounded-xl font-semibold transition-all ${
+                  is3DMode
+                    ? "bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-lg"
+                    : "bg-muted text-foreground hover:bg-muted/80"
+                }`}
+              >
+                {is3DMode ? <Box className="w-5 h-5" /> : <Sparkles className="w-5 h-5" />}
+                {is3DMode ? "3D Mode" : "Enter 3D"}
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Device Capability Warning */}
+        {deviceCapabilities && !deviceCapabilities.webgl2 && (
+          <div className="bg-amber-100 border border-amber-400 text-amber-700 px-4 py-3 rounded-lg mb-4">
+            <p className="text-sm">
+              ⚠️ Your device doesn't support WebGL2 required for 3D mode. Using classic 2D interface.
+            </p>
+          </div>
+        )}
       </div>
       <motion.div
         initial={{ opacity: 0 }}
