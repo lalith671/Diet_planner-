@@ -41,6 +41,12 @@ const Index = () => {
   const [results, setResults] = useState<Results | null>(null);
   const [showResults, setShowResults] = useState<boolean>(false);
 
+  // 3D Mode states
+  const [is3DMode, setIs3DMode] = useState<boolean>(false);
+  const [current3DScene, setCurrent3DScene] = useState<SceneType>('ai-lab');
+  const [deviceCapabilities, setDeviceCapabilities] = useState<any>(null);
+  const [nutrition3DData, setNutrition3DData] = useState<any>(null);
+
 
   // Helper: Calculate BMI
   function calculateBMI(weight: number, height: number): number {
